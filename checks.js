@@ -1,6 +1,6 @@
 //require('check-repair');
 require('check-build');
-require('check-extension');
+require('check-extensions');
 require('check-end-of-life');
 //require('check-controller');
 require('check-leeches');
