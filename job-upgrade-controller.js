@@ -11,7 +11,7 @@ function transfer(creep, s){
 }
 
 function UpgradeControllerJob(id) {
-    this.type = 'UpgradeControllerJob';
+    this.type = 'upgrade-controller';
     this.id = id;
 }
 
