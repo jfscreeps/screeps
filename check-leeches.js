@@ -1,7 +1,7 @@
 var jobQueue = require('jobQueue');
 
 module.exports = function() {
-	if(!Memory.nextLeechCheck || Memory.lastLeechCheck <= Game.time) {
+	if(!Memory.nextLeechCheck || Memory.nextLeechCheck <= Game.time) {
 		Memory.nextLeechCheck = Game.time + 60;
 	console.log('Checking leeches');
 
