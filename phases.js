@@ -20,7 +20,7 @@ module.exports = {
 
             if(creep.job)
             {
-                creep.job.perform();
+                creep.job.perform(creep);
             }
         }
 
