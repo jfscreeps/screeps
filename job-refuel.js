@@ -1,11 +1,10 @@
-var jobber = require('jobRegistry');
 var utils = require('utils');
 
-function RefuelJob() {
-    this.type = 'RefuelJob';
+function Refuel() {
+    this.type = 'refuel';
 }
 
-RefuelJob.prototype.perform = function(creep) {
+Refuel.prototype.perform = function(creep) {
     
     if(creep.energy > 50) {
     	creep.memory.job = undefined;
@@ -16,8 +15,4 @@ RefuelJob.prototype.perform = function(creep) {
 
 }
 
-module.exports = RefuelJob;
-
-jobber.registerJobType('RefuelJob', function(def) { 
-    return new RefuelJob();
-});
+module.exports = Refuel;

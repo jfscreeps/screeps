@@ -1,10 +1,9 @@
 var jobQueue = require('jobQueue');
-var jobber = require('jobRegistry');
 var utils = require('utils');
 var UpgradeControllerJob = require('job-upgradeController');
 
 function ClaimControllerJob(id) {
-    this.type = 'ClaimControllerJob';
+    this.type = 'claim-controller';
     this.id = id;
 }
 
@@ -30,7 +29,3 @@ creep.say('not found');
 }
 
 module.exports = ClaimControllerJob;
-
-jobber.registerJobType('ClaimControllerJob', function(def) {
-    return new ClaimControllerJob(def.id);
-});

@@ -1,8 +1,7 @@
-var jobber = require('jobRegistry');
 var utils = require('utils');
 
 function Replace(target) {
-    this.type = 'Replace';
+    this.type = 'replace';
     this.target = target;
 }
 
@@ -38,7 +37,3 @@ Replace.prototype.perform = function(creep) {
 }
 
 module.exports = Replace;
-
-jobber.registerJobType('Replace', function(def) { 
-    return new Replace(def.target);
-});

@@ -1,4 +1,3 @@
-var jobber = require('jobRegistry');
 var utils = require('utils');
 
 function getSource(leech){
@@ -25,7 +24,7 @@ function getSource(leech){
 }
 
 function Leech() {
-    this.type = 'Leech';
+    this.type = 'leech';
 }
 
 Leech.prototype.perform = function(creep) {
@@ -49,7 +48,3 @@ Leech.prototype.perform = function(creep) {
 }
 
 module.exports = Leech;
-
-jobber.registerJobType('Leech', function(def) { 
-    return new Leech();
-});

@@ -1,36 +1,36 @@
-var tick = require('tick');
+var checks = require('checks');
+var jobQueue = require('jobQueue');
+var jobs = require('jobs');
+
+Game.cleanUp = [];
 
 module.exports = {
     processDeaths: function() {},
 
     checkForNewJobs: function() {
-        require('checks');
+        checks();
     },
 
     executeJobs: function() {
-        var jobQueue = require('jobQueue');
-        
-        require('jobs');
-        
         for(var name in Game.creeps) {
         	var creep = Game.creeps[name];
-        
+
             if(creep.spawning) continue;
 
-        	var job = jobQueue.getCurrentJob(creep);
+        	creep.job = jobQueue.getCurrentJob(creep);
 
-            if(job)
+            if(creep.job)
             {
-                job.perform(creep);
+                creep.job.perform();
             }
         }
-        
+
         for(var name in Game.rooms)
         {
             var room = Game.rooms[name];
-        
+
             var backgroundJob = jobQueue.getBackgroundJob(room);
-        
+
             if(backgroundJob)
             {
                 backgroundJob.perform(room);
@@ -39,9 +39,9 @@ module.exports = {
     },
 
     cleanUp: function() {
-        if(!tick.cleanUp || tick.cleanUp.length == 0) return;
+        if(Game.cleanUp.length == 0) return;
         
-        for(var i = 0; i < tick.cleanUp.length; i++) {
+        for(var i = 0; i < Game.cleanUp.length; i++) {
             tick.cleanUp[i]();
         }
     }

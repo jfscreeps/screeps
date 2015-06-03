@@ -1,8 +1,7 @@
-var jobber = require('jobRegistry');
 var utils = require('utils');
 
 function Reservoir(structure, pos) {
-    this.type = 'Reservoir';
+    this.type = 'reservoir';
     this.structure = structure;
     this.pos = pos;
 }
@@ -30,7 +29,3 @@ Reservoir.prototype.perform = function(creep) {
 }
 
 module.exports = Reservoir;
-
-jobber.registerJobType('Reservoir', function(def) { 
-    return new Reservoir(def.structure, def.pos);
-});

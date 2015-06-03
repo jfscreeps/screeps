@@ -1,10 +1,9 @@
 var jobQueue = require('jobQueue');
-var jobber = require('jobRegistry');
 var utils = require('utils');
 var RefuelJob = require('job-refuel');
 
 function RepairJob(id) {
-    this.type = 'RepairJob'
+    this.type = 'repair';
     this.id = id;
 }
 
@@ -42,7 +41,3 @@ creep.say('done');
 }
 
 module.exports = RepairJob;
-
-jobber.registerJobType('RepairJob', function(def) {
-    return new RepairJob(def.id);
-});

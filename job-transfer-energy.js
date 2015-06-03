@@ -1,10 +1,9 @@
 var jobQueue = require('jobQueue');
-var jobber = require('jobRegistry');
 var utils = require('utils');
 var RefuelJob = require('job-refuel');
 
 function TransferEnergyJob(id) {
-    this.type = 'TransferEnergyJob';
+    this.type = 'transfer-energy';
     this.id = id;
 }
 
@@ -43,7 +42,3 @@ TransferEnergyJob.prototype.perform = function(creep) {
 }
 
 module.exports = TransferEnergyJob;
-
-jobber.registerJobType('TransferEnergyJob', function(def) {
-    return new TransferEnergyJob(def.id);
-});

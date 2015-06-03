@@ -1,4 +1,3 @@
-var jobber = require('jobRegistry');
 var jobQueue = require('jobQueue');
 
 function createCreep(spawn, body, memory) {
@@ -10,7 +9,7 @@ console.log(result + ': ' + JSON.stringify(memory));
 }
 
 function CreateCreepJob(body, memory) {
-    this.type = 'CreateCreepJob';
+    this.type = 'create-creep';
     this.body = body;
     this.memory = memory;
 }
@@ -39,7 +38,3 @@ CreateCreepJob.prototype.perform = function(room) {
 }
 
 module.exports = CreateCreepJob;
-
-jobber.registerJobType('CreateCreepJob', function(def) { 
-    return new CreateCreepJob(def.body, def.memory);
-});

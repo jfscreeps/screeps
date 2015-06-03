@@ -1,12 +1,11 @@
-var jobber = require('jobRegistry');
 var utils = require('utils');
 
-function RunnerJob(leech) {
-    this.type = 'RunnerJob';
+function Runner(leech) {
+    this.type = 'runner';
     this.leech = leech;
 }
 
-RunnerJob.prototype.perform = function(creep) {
+Runner.prototype.perform = function(creep) {
     if(creep.memory.mode == 'return') {
         utils.depositEnergy(creep);
         
@@ -32,7 +31,7 @@ RunnerJob.prototype.perform = function(creep) {
     }
 }
 
-RunnerJob.prototype.getLeech = function(creep) {    
+Runner.prototype.getLeech = function(creep) {    
     var leech = Game.creeps[this.leech]
 
     if(!leech)
@@ -60,8 +59,4 @@ RunnerJob.prototype.getLeech = function(creep) {
     return Game.creeps[this.leech]
 }
 
-module.exports = RunnerJob;
-
-jobber.registerJobType('RunnerJob', function(def) { 
-    return new RunnerJob(def.leech);
-});
+module.exports = Runner;

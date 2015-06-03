@@ -1,4 +1,3 @@
-var jobber = require('jobRegistry');
 var utils = require('utils');
 
 function getJobs(room){
@@ -66,6 +65,14 @@ function giveCreepNewJob(creep) {
         creep.memory.job = jobKey;
         creep.say(def.type);
     }
+}
+
+function getJobFromDef(def) {
+	var Job = require('job-' + def.type);
+	
+	var job = new Job();
+	
+	return _.extend(job, def);
 }
 
 var queue = {
@@ -136,7 +143,7 @@ var queue = {
         
         if(def == null) return null;
         
-        var job = jobber.getJobFromDef(def);
+        var job = getJobFromDef(def);
         
         if(job == null) {
             console.log('removing job ' + JSON.stringify(def));

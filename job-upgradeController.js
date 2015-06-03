@@ -1,5 +1,4 @@
 var jobQueue = require('jobQueue');
-var jobber = require('jobRegistry');
 var utils = require('utils');
 var RefuelJob = require('job-refuel');
 
@@ -46,7 +45,3 @@ creep.say('full');
 }
 
 module.exports = UpgradeControllerJob;
-
-jobber.registerJobType('UpgradeControllerJob', function(def) {
-    return new UpgradeControllerJob(def.id);
-});
