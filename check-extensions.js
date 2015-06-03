@@ -2,8 +2,9 @@ var jobQueue = require('jobQueue');
 var TransferEnergy = require('job-transfer-energy');
 
 module.exports = function() {
-	if(!Memory.nextExtensionCheck || Memory.nextExtensionCheck <= Game.time) {
-		Memory.nextExtensionCheck = Game.time + 30;
+	if(Memory.checkExtensions) {
+	Memory.checkExtensions = undefined;
+	
 	console.log('Checking low fuel extensions');
 		
 		_.each(Game.rooms, function(room){

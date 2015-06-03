@@ -7,25 +7,36 @@ function Build(id) {
     this.id = id;
 }
 
+function complete(creep){
+	jobQueue.jobComplete(creep);
+	
+	if(creep.memory.buildingExt) {
+        Memory.checkExtensions = true;
+		creep.memory.buildingExt = undefined;
+	}
+}
+
 Build.prototype.perform = function(creep) {
     var results = creep.room.find(FIND_CONSTRUCTION_SITES, {filter: {id: this.id}});
     
     if(results.length == 0)
     {
         creep.say('cant find site');
-        jobQueue.jobComplete(creep);
+        complete(creep);
         return;
     }
     
     var site = results[0];
     
+	creep.memory.buildingExt = site.structureType == STRUCTURE_EXTENSION;
+	
     creep.moveTo(site);
     creep.build(site);
 
     if(site.progress == site.progressTotal)
     {
 creep.say('done');
-        jobQueue.jobComplete(creep);
+        complete(creep);
         return;
     }
     

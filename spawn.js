@@ -1,32 +1,13 @@
-var bodies = require('bodies');
 var jobQueue = require('jobQueue');
-
-function getEnergy(room, useOnlyPoweredExt) {
-    var extensions = Memory.extensions;
-
-    if(useOnlyPoweredExt) {
-        extensions = room.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_EXTENSION, energy: 50}}).length;
-    }
-
-    return 300 + (extensions * 50);
-}
 
 function queueCreep(room, useOnlyPoweredExt, bodyType, memory) {
     room = Game.rooms[room] || 
            (Game.spawns[room] && Game.spawns[room].room) ||
            room;
-    
-    var energy = getEnergy(room, useOnlyPoweredExt);
-
-    console.log('creating ' + bodyType);
-
-    var body = bodies[bodyType](energy);
-
-    console.log('    with body ' + JSON.stringify(body));
 
     memory = _.merge({ bodyType: bodyType }, memory);
 
-    jobQueue.addBackgroundJob(room, new jobs.CreateCreep(body, memory));
+    jobQueue.addBackgroundJob(room, new (require('job-create-creep'))(bodyType, memory, useOnlyPoweredExt));
 }
 
 var spawn = {

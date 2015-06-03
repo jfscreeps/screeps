@@ -1,17 +1,31 @@
 var jobQueue = require('jobQueue');
+var bodies = require('bodies');
+
+
+function getEnergy(room, useOnlyPoweredExt) {
+    var extensions = Memory.extensions;
+
+    if(useOnlyPoweredExt) {
+        extensions = room.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_EXTENSION, energy: 50}}).length;
+    }
+
+    return 300 + (extensions * 50);
+}
 
 function createCreep(spawn, body, memory) {
     var result = spawn.createCreep(body, null, memory);
     
-console.log(result + ': ' + JSON.stringify(memory));
+console.log('creating creep ' + result + ': ' + JSON.stringify(memory));
+console.log('    with body ' + JSON.stringify(body));
 
     return !(_.isNumber(result) && result < 0);
 }
 
-function CreateCreepJob(body, memory) {
+function CreateCreepJob(bodyType, memory, useOnlyPoweredExt) {
     this.type = 'create-creep';
-    this.body = body;
+    this.bodyType = bodyType;
     this.memory = memory;
+	this.useOnlyPoweredExt = useOnlyPoweredExt;
 }
 
 CreateCreepJob.prototype.perform = function(room) {
@@ -25,12 +39,16 @@ CreateCreepJob.prototype.perform = function(room) {
     }
 
     spawn.memory.busy = true;
+
+    var energy = getEnergy(room, this.useOnlyPoweredExt);
+
+    var body = bodies[this.bodyType](energy);
+
+    var result = spawn.canCreateCreep(body);
     
-    var result = spawn.canCreateCreep(this.body);
-    
-    if(result == OK && createCreep(spawn, this.body, this.memory)) {
+    if(result == OK && createCreep(spawn, body, this.memory)) {
         spawn.memory.busy = false;
-        Memory.nextExtensionCheck = Game.time
+        Memory.checkExtensions = true;
     }
     else {
         jobQueue.addBackgroundJob(room, this);
