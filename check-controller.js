@@ -1,6 +1,6 @@
 var jobQueue = require('jobQueue');
-var ClaimController = require('job-claimController');
-var UpgradeController = require('job-upgradeController');
+var ClaimController = require('job-claim-controller');
+var UpgradeController = require('job-upgrade-controller');
 
 module.exports = function() {
 	if(!Memory.nextControllerCheck || Memory.nextControllerCheck <= Game.time) {
