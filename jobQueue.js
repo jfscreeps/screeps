@@ -168,7 +168,7 @@ var queue = {
         
         var def = jobs.shift();
         
-        return def && jobber.getJobFromDef(def.job);
+        return def && getJobFromDef(def.job);
     }
 };
 
