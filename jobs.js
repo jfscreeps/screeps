@@ -1,6 +1,4 @@
 module.exports = {
-    Null: require('job-null'),
-
     Build: require('job-build'),
     Leech: require('job-leech'),
     Refuel: require('job-refuel'),

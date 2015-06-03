@@ -8,7 +8,6 @@ module.exports = {
     },
 
     executeJobs: function() {
-        var leech = require('leech');
         var jobQueue = require('jobQueue');
         
         require('jobs');
