@@ -1,5 +1,4 @@
 var jobQueue = require('jobQueue');
-var jobber = require('jobs');
 var utils = require('utils');
 
 if(!Memory.nextFlagCheck || Memory.nextFlagCheck <= Game.time) {

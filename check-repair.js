@@ -1,6 +1,5 @@
 var jobQueue = require('jobQueue');
-var jobber = require('jobs');
-var RepairJob = require('job-repair');
+var Repair = require('job-repair');
 
 if(!Memory.lastRepairCheck || Memory.lastRepairCheck < Game.time - 30) {
     Memory.lastRepairCheck = Game.time;
@@ -18,7 +17,7 @@ console.log('Checking damaged structures');
 console.log('    found ' + structures.length + ' damaged structures');
         
         _.each(structures, function(structure){
-            var job = new RepairJob(structure.id);
+            var job = new Repair(structure.id);
             
             if(!jobQueue.jobExists(room, job)) {
                 jobQueue.addJob(room, job, [WORK, CARRY, MOVE], structure.pos, 0);

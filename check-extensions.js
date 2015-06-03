@@ -1,6 +1,5 @@
 var jobQueue = require('jobQueue');
-var jobber = require('jobs');
-var TransferEnergyJob = require('job-transferEnergy');
+var TransferEnergy = require('job-transfer-energy');
 
 if(!Memory.nextExtensionCheck || Memory.nextExtensionCheck <= Game.time) {
     Memory.nextExtensionCheck = Game.time + 30;
@@ -21,7 +20,7 @@ console.log('Checking low fuel extensions');
 console.log('    found ' + lowEnergy.length + ' low energy structures');
 
         _.each(lowEnergy, function(structure) {
-            var job = new TransferEnergyJob(structure.id);
+            var job = new TransferEnergy(structure.id);
             
             if(!jobQueue.jobExists(room, job))
             {

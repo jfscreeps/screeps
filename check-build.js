@@ -1,6 +1,5 @@
 var jobQueue = require('jobQueue');
-var jobber = require('jobs');
-var BuildJob = require('job-build');
+var Build = require('job-build');
 var spawn = require('spawn');
 
 if(!Memory.nextBuildCheck || Memory.nextBuildCheck <= Game.time) {
@@ -13,7 +12,7 @@ console.log('Checking unfinished construction sites');
 console.log('    found ' + sites.length + ' construction sites');
 
         _.each(sites, function(site){
-            var job = new BuildJob(site.id);
+            var job = new Build(site.id);
             
             if(!jobQueue.jobExists(room, job)) {
                 jobQueue.addJob(room, job, [WORK, CARRY, MOVE], site.pos, 0);

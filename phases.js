@@ -1,6 +1,5 @@
 var checks = require('checks');
 var jobQueue = require('jobQueue');
-var jobs = require('jobs');
 
 Game.cleanUp = [];
 

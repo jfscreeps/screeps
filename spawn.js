@@ -1,6 +1,5 @@
 var bodies = require('bodies');
 var jobQueue = require('jobQueue');
-var jobs = require('jobs');
 
 function getEnergy(room, useOnlyPoweredExt) {
     var extensions = Memory.extensions;
@@ -41,19 +40,19 @@ var spawn = {
         
         var bodyType = creep.memory.bodyType;
         
-        queueCreep(creep.room, false, bodyType, {job: new jobs.Replace(creep.name)});
+        queueCreep(creep.room, false, bodyType, {job: new (require('job-replace'))(creep.name)});
     },
     leech: function(room, useOnlyPoweredExt) {
-        queueCreep(room, useOnlyPoweredExt, 'leech', {need: 2, job: new jobs.Leech()});
+        queueCreep(room, useOnlyPoweredExt, 'leech', {need: 2, job: new (require('job-leech'))()});
     },
     runner: function(room, useOnlyPoweredExt) {
-        queueCreep(room, useOnlyPoweredExt, 'runner', {job: new jobs.Runner()});
+        queueCreep(room, useOnlyPoweredExt, 'runner', {job: new (require('job-runner'))()});
     },
     worker: function(room, useOnlyPoweredExt) {
         queueCreep(room, useOnlyPoweredExt, 'worker');
     },
     reservoir: function(room, structure, pos, useOnlyPoweredExt) {
-        queueCreep(room, useOnlyPoweredExt, 'reservoir', {job: new jobs.Reservoir(structure, pos)});
+        queueCreep(room, useOnlyPoweredExt, 'reservoir', {job: new (require('job-reservoir'))(structure, pos)});
     }
 }
 

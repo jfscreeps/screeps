@@ -1,7 +1,6 @@
 var jobQueue = require('jobQueue');
-var jobber = require('jobs');
-var ClaimControllerJob = require('job-claimController');
-var UpgradeControllerJob = require('job-upgradeController');
+var ClaimController = require('job-claimController');
+var UpgradeController = require('job-upgradeController');
 
 if(!Memory.lastControllerCheck || Memory.lastControllerCheck < Game.time - 300) {
     Memory.lastControllerCheck = Game.time;
@@ -21,11 +20,11 @@ console.log('Checking controllers');
             
             if(controller.level == 0) {
                 console.log('claim controller');
-                job = new ClaimControllerJob(controller.id);
+                job = new ClaimController(controller.id);
             }
             else if(controller.my && controller.level < 8) {
                 console.log('upgrade controller');
-                job = new UpgradeControllerJob(controller.id);
+                job = new UpgradeController(controller.id);
             }
             else {
                 console.log('attack controller (todo)');

@@ -1,6 +1,4 @@
 var jobQueue = require('jobQueue');
-var jobber = require('jobs');
-var BuildJob = require('job-build');
 
 if(!Memory.lastLeechCheck || Memory.lastLeechCheck < Game.time - 60) {
     Memory.lastLeechCheck = Game.time;
