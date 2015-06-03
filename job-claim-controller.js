@@ -1,6 +1,6 @@
 var jobQueue = require('jobQueue');
 var utils = require('utils');
-var UpgradeControllerJob = require('job-upgradeController');
+var UpgradeControllerJob = require('job-upgrade-controller');
 
 function ClaimControllerJob(id) {
     this.type = 'claim-controller';
